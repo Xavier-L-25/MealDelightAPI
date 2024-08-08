@@ -1,0 +1,14 @@
+@MealDelightAPI_HostAddress = https://localhost:7200
+
+GET {{MealDelightAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+GET {{MealDelightAPI_HostAddress}}/weatherforecast
+
+###
+
+GET {{MealDelightAPI_HostAddress}}/api/superhero
+
+###
