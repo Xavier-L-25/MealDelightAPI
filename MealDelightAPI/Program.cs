@@ -1,4 +1,3 @@
-using MealDelightAPI.Controllers.Entities;
 using MealDelightAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,15 +5,12 @@ using System;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-
-
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Added Section
 var connection = String.Empty;
 if (builder.Environment.IsDevelopment())
 {
@@ -28,8 +24,7 @@ else
 
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(connection));
-////////
-///
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("NextjsUI", policyBuilder =>
@@ -40,19 +35,15 @@ builder.Services.AddCors(options =>
         policyBuilder.AllowCredentials();
     });
 });
-/////////
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//}
-
-app.UseSwagger();
-app.UseSwaggerUI();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 
@@ -61,20 +52,5 @@ app.UseCors("NextjsUI");
 app.UseAuthorization();
 
 app.MapControllers();
-
-// Added Section
-app.MapGet("/Person", (DataContext context) =>
-{
-    return context.Person.ToList();
-})
-.WithName("GetPersons");
-
-app.MapPost("/Person", (Person person, DataContext context) =>
-{
-    context.Add(person);
-    context.SaveChanges();
-})
-.WithName("CreatePerson");
-/////////
 
 app.Run();

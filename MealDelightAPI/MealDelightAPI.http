@@ -12,3 +12,7 @@ GET {{MealDelightAPI_HostAddress}}/weatherforecast
 GET {{MealDelightAPI_HostAddress}}/api/superhero
 
 ###
+
+GET {{MealDelightAPI_HostAddress}}/api/person
+
+###

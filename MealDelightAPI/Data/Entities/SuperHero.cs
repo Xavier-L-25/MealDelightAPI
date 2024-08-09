@@ -1,4 +1,4 @@
-﻿namespace MealDelightAPI.Controllers.Entities
+﻿namespace MealDelightAPI.Data.Entities
 {
     public class SuperHero
     {

@@ -1,4 +1,4 @@
-﻿using MealDelightAPI.Controllers.Entities;
+﻿using MealDelightAPI.Data.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
