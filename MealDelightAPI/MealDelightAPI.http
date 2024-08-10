@@ -16,3 +16,7 @@ GET {{MealDelightAPI_HostAddress}}/api/superhero
 GET {{MealDelightAPI_HostAddress}}/api/person
 
 ###
+
+GET {{MealDelightAPI_HostAddress}}/api/person
+
+###
