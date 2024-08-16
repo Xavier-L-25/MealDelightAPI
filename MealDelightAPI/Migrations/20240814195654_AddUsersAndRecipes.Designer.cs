@@ -3,6 +3,7 @@ using MealDelightAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MealDelightAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240814195654_AddUsersAndRecipes")]
+    partial class AddUsersAndRecipes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +45,7 @@ namespace MealDelightAPI.Migrations
                     b.ToTable("Person");
                 });
 
-            modelBuilder.Entity("MealDelightAPI.Data.Entities.Recipe", b =>
+            modelBuilder.Entity("MealDelightAPI.Data.Entities.Recipes", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,14 +72,17 @@ namespace MealDelightAPI.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UsersId");
 
                     b.ToTable("Recipes");
                 });
 
-            modelBuilder.Entity("MealDelightAPI.Data.Entities.User", b =>
+            modelBuilder.Entity("MealDelightAPI.Data.Entities.Users", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -109,11 +115,11 @@ namespace MealDelightAPI.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MealDelightAPI.Data.Entities.Recipe", b =>
+            modelBuilder.Entity("MealDelightAPI.Data.Entities.Recipes", b =>
                 {
-                    b.HasOne("MealDelightAPI.Data.Entities.User", "Users")
+                    b.HasOne("MealDelightAPI.Data.Entities.Users", "Users")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
