@@ -18,11 +18,36 @@ namespace MealDelightAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Recipe>>> GetAllRecipes()
+        public async Task<ActionResult<List<Recipe>>> GetAllRecipes([FromQuery] string? query)
         {
-            var recipes = await _dataContext.Recipes.ToListAsync();
+            List<Recipe> recipes;
+
+            if (query is null)
+            {
+                recipes = await _dataContext.Recipes.ToListAsync();
+            }
+            else
+            {
+                recipes = await _dataContext.Recipes
+                                    .Where(r => r.Name.Contains(query))
+                                    .ToListAsync();
+            }
+           
 
             return Ok(recipes);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Recipe>> GetRecipeById(int id)
+        {
+            var recipe = await _dataContext.Recipes.FindAsync(id);
+
+            if (recipe is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(recipe);
         }
     }
 }
