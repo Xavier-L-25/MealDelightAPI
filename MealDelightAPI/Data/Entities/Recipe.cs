@@ -13,10 +13,12 @@ namespace MealDelightAPI.Data.Entities
         [Range(1, 100, ErrorMessage = "Recipe name must be between 1 and 100 characters")]
         public required string Name { get; set; }
         public required string Type { get; set; }
-        public required string Description { get; set; }
+        public required string Summary { get; set; }
+        public required List<string> Ingredients { get; set; }
+        public required string Instructions { get; set; }
 
         //Navigation Property to Users
         [JsonIgnore]
-        public User? Users { get; set; }
+        public User? User { get; set; }
     }
 }
