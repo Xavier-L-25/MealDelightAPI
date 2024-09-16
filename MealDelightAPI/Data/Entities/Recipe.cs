@@ -19,10 +19,7 @@ namespace MealDelightAPI.Data.Entities
         public required string Instructions { get; set; }
 
         //Navigation Property to Users
-        //[JsonIgnore]
-        //public User? User { get; set; }
-
         [JsonIgnore]
-        public IdentityUser? User { get; set; }
+        public User? User { get; set; }
     }
 }

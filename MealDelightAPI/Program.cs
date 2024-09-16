@@ -1,8 +1,10 @@
 using MealDelightAPI.Data;
 using MealDelightAPI.Data.Entities;
+using MealDelightAPI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System;
@@ -42,9 +44,13 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(connection));
 
 builder.Services.AddAuthorization();
+builder.Services.AddAuthentication()
+    .AddCookie(IdentityConstants.ApplicationScheme)
+    .AddBearerToken(IdentityConstants.BearerScheme);
 
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
-    .AddEntityFrameworkStores<DataContext>();
+builder.Services.AddIdentityCore<User>()
+    .AddEntityFrameworkStores<DataContext>()
+    .AddApiEndpoints();
 
 builder.Services.AddCors(options =>
 {
@@ -64,11 +70,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.ApplyMigrations();
 }
 
-app.MapIdentityApi<IdentityUser>();
+app.MapIdentityApi<User>();
 
-app.MapPost("/logout", async (SignInManager<IdentityUser> signInManager,
+app.MapPost("/logout", async (SignInManager<User> signInManager,
     [FromBody] object empty) =>
 {
     if (empty != null)

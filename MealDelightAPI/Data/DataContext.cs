@@ -12,8 +12,5 @@ namespace MealDelightAPI.Data
         }
        
         public DbSet<Recipe> Recipes { get; set; }
-
-        //public DbSet<User> Users { get; set; }
-        //public DbSet<UserCredential> UserCredentials { get; set; }
     }
 }

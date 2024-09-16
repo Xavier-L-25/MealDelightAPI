@@ -1,7 +1,6 @@
 ﻿using MealDelightAPI.Data;
 using MealDelightAPI.Data.Entities;
 using MealDelightAPI.Models.Recipe;
-using MealDelightAPI.Models.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
